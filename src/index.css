@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "VT323", monospace;
+}
+
+body {
+  font-family: 'VT323', monospace;
+  background-color: #020202;
+  color: #00FFFF;
+  text-transform: uppercase;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.glitch-wrapper {
+  position: relative;
+}
+
+.glitch-text {
+  position: relative;
+  color: #00FFFF;
+  font-weight: bold;
+}
+
+.glitch-text::before, .glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #020202;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #FF00FF;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #00FFFF;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(12px, 9999px, 89px, 0); }
+  20% { clip: rect(76px, 9999px, 14px, 0); }
+  40% { clip: rect(43px, 9999px, 54px, 0); }
+  60% { clip: rect(89px, 9999px, 23px, 0); }
+  80% { clip: rect(22px, 9999px, 76px, 0); }
+  100% { clip: rect(54px, 9999px, 43px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(23px, 9999px, 87px, 0); }
+  40% { clip: rect(87px, 9999px, 34px, 0); }
+  60% { clip: rect(12px, 9999px, 65px, 0); }
+  80% { clip: rect(98px, 9999px, 21px, 0); }
+  100% { clip: rect(43px, 9999px, 76px, 0); }
+}
+
+.scanlines {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.25));
+  background-size: 100% 4px;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 255, 255, 0.02);
+  z-index: 9999;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+.shake {
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+/* Custom scrollbar for terminal feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #020202;
+  border-left: 1px solid #00FFFF;
+}
+::-webkit-scrollbar-thumb {
+  background: #FF00FF;
+}
